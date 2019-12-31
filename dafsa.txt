@@ -1,0 +1,27 @@
+top, tap, taps:
+-- alphabet is known: lowercase + printable
+-- header (indexes of node starts)
+
+- ALPHABET_SIZE < 64
+- ALPHABET_SIZE lines of fixed size
+- LINE is a uint64, bit set for each alphabet member
+
+
+---- how to get there
+++ looking for "tup"
+- open read header n_indexes
+- look for 't' index (optimize with known alphabet) guess -> fall back to search... or force it
+	- read n_links, looking for 'u'
+	- repeat
+
+
+---- OR MAYBE..
+
+- search up to N consecutive chars, then a big list to sort through for each, use a trie/etc (not space efficient)
+	- bound by uint64 to allow cycles?
+
+
+\1 = root
+\0 = end of word
+follows type: offset from current char record
+[BYTE CHAR] [BYTE N_FOLLOWS] [BYTE FOLLOWS 1] [BYTE FOLLOWS 2]

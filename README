@@ -1,0 +1,16 @@
+// query the cache
+sym -provides ‘symbol’
+sym -uses ‘symbol’
+sym -provides ‘*sym*’
+sym -uses ‘*sym*’
+sym -uses -executable -dylib ’*sym*’ -fat -arch -indr
+sym -provides ‘*sym’ -private
+
+	-prebound -absolute
+
+// generate json/cache files from a path, or just validate
+symcache -validate /path
+symcache -cache /path
+
+// make a go file to build ‘sym’
+symgen -out /file /path…
